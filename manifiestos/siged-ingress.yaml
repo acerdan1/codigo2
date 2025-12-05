@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: siged-backend-ingress
+  namespace: ninaf-qa
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.ui/redirect-entry-point: https
+spec:
+  tls:
+    - hosts:
+        - siged-backend.cloudcomputing.com.pe
+  rules:
+    - host: siged-backend.cloudcomputing.com.pe
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: siged-service
+              servicePort: 80

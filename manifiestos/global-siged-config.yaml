@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: ninaf-qa
+  name: global-siged-config
+data:
+  ALFRESCO_URL_INTERNO: http://10.1.1.55:8080
+  BASE_DATOS_IP: jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.6.0.15)(PORT = 1532)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = DVOEFABD)))
+  BASE_DATOS_USERNAME: SIS_STD_APP
+  BASE_DATOS_PASSWORD: desarrollo

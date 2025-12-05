@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ninaf-qa
+  name: siged-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: siged-backend
+  template:
+    metadata:
+      name: siged-backend
+      labels:
+        app: siged-backend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+        - name: siged-backend
+          image: reg.oefa.gob.pe/oefa/pry-201-siged2.0/siged-backend:desa-1.0.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "150m"
+            limits:
+              memory: 750Mi
+              cpu: 750m
+          ports:
+            - name: siged-pod-port
+              containerPort: 8088
+              hostPort: 8088
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: global-siged-config
+          env:
+            - name: JAVA_OPTS
+              value: -Xmx512m -Xms512m -Dspring.profiles.active=deploy

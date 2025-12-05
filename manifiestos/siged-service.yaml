@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: siged-service
+  namespace: ninaf-qa
+  labels:
+    app: siged-server
+spec:
+  type: ClusterIP
+  ports:
+    - name: siged-serv-port
+      port: 80
+      protocol: TCP
+      targetPort: 8088
+  selector:
+    app: siged-backend
